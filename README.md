@@ -27,7 +27,7 @@ has_many :buy_records
 |shipping_area      |string     |null: false                     |
 |days_to_ship       |date       |null: false                     |
 |price              |integer    |null: false                     |
-|user               |references | null: false, foreign_key: true |
+|user_id            |integer    | null: false, foreign_key: true |
 
 
 
@@ -50,15 +50,15 @@ belongs_to :item
 
 ## street_add
 
-|Column       |Type       |Options                         |
-|-------------|-----------|--------------------------------|
-|postal cord  |string     |null: false                     |
-|prefectures  |integer    |null: false                     |
-|municipality |string     |null: false                     |
-|address      |string     |null: false                     |
-|buildingname |string     ||
-|phone_number |string     |null: false                     |
-|buy_record   |references | null: false, foreign_key: true |
+|Column       |Type         |Options                         |
+|-------------|-------------|--------------------------------|
+|postal cord  |string       |null: false                     |
+|prefecture_id  |integer    |null: false                     |
+|municipality |string       |null: false                     |
+|address      |string       |null: false                     |
+|buildingname |string       ||
+|phone_number |string       |null: false                     |
+|buy_record   |references   | null: false, foreign_key: true |
 
 
 ### Association
