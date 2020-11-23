@@ -21,13 +21,13 @@ has_many :buy_records
 |-------------------|-----------|--------------------------------|
 |name               |string     |null: false                     |
 |explanation        |string     |null: false                     |
-|category           |string     |null: false                     |
+|category_id        |integer    |null: false                     |
 |status             |string     |null: false                     |
 |shipping_fee_burden|string     |null: false                     |
 |shipping_area      |string     |null: false                     |
 |days_to_ship       |date       |null: false                     |
 |price              |integer    |null: false                     |
-|user_id            |integer    | null: false, foreign_key: true |
+|user               |references |null: false, foreign_key: true  |
 
 
 
@@ -52,13 +52,13 @@ belongs_to :item
 
 |Column       |Type         |Options                         |
 |-------------|-------------|--------------------------------|
-|postal cord  |string       |null: false                     |
-|prefecture_id  |integer    |null: false                     |
+|postal_cord  |string       |null: false                     |
+|prefecture_id|integer      |null: false                     |
 |municipality |string       |null: false                     |
 |address      |string       |null: false                     |
 |buildingname |string       ||
 |phone_number |string       |null: false                     |
-|buy_record   |references   | null: false, foreign_key: true |
+|buy_record_id|integer      | null: false, foreign_key: true |
 
 
 ### Association
