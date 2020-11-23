@@ -17,17 +17,17 @@ has_many :buy_records
 
 ## items
 
-|Column             |Type       |Options                         |
-|-------------------|-----------|--------------------------------|
-|name               |string     |null: false                     |
-|explanation        |string     |null: false                     |
-|category_id        |integer    |null: false                     |
-|status             |string     |null: false                     |
-|shipping_fee_burden|string     |null: false                     |
-|shipping_area      |string     |null: false                     |
-|days_to_ship       |date       |null: false                     |
-|price              |integer    |null: false                     |
-|user               |references |null: false, foreign_key: true  |
+|Column               | Type       |Options                         |
+|----------------------|-----------|--------------------------------|
+|name                  |string     |null: false                     |
+|explanation           |string     |null: false                     |
+|category_id           |integer    |null: false                     |
+|status_id             |integer    |null: false                     |
+|shipping_fee_burden_id|integer    |null: false                     |
+|shipping_area_id      |integer    |null: false                     |
+|days_to_ship_id       |integer    |null: false                     |
+|price                 |integer    |null: false                     |
+|user                  |references |null: false, foreign_key: true  |
 
 
 
@@ -58,7 +58,7 @@ belongs_to :item
 |address      |string       |null: false                     |
 |buildingname |string       ||
 |phone_number |string       |null: false                     |
-|buy_record_id|integer      | null: false, foreign_key: true |
+|buy_record   |references   |null: false, foreign_key: true  |
 
 
 ### Association
