@@ -59,4 +59,12 @@ end
 
 group :production do
   gem 'rails_12factor'
+<<<<<<< Updated upstream
 end
+=======
+end
+
+gem 'active_hash'
+
+gem 'devise'
+>>>>>>> Stashed changes
