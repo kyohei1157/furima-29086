@@ -1,4 +1,5 @@
 ## users
+
 |Column             |Type  |Options    |
 |-------------------|------|-----------|
 |surname            |string|null: false|
@@ -15,6 +16,7 @@ has_many :items
 has_many :buy_records
 
 ## items
+
 |Column               | Type       |Options                         |
 |----------------------|-----------|--------------------------------|
 |name                  |string     |null: false                     |
@@ -27,15 +29,19 @@ has_many :buy_records
 |price                 |integer    |null: false                     |
 |user                  |references |null: false, foreign_key: true  |
 
+
+
 ### Association
 has_one :buy_record
 belongs_to :user
 
 ## buy_records
+
 |Column|Type       |Options                        |
 |------|-----------|-------------------------------|
 |user  |references |null: false, foreign_key: true |
 |item  |references |null: false, foreign_key: true |
+
 
 ### Association
 has_one :street_add
@@ -43,6 +49,7 @@ belongs_to :user
 belongs_to :item
 
 ## street_add
+
 |Column       |Type         |Options                         |
 |-------------|-------------|--------------------------------|
 |postal_cord  |string       |null: false                     |
@@ -53,5 +60,11 @@ belongs_to :item
 |phone_number |string       |null: false                     |
 |buy_record   |references   |null: false, foreign_key: true  |
 
+
 ### Association
 belongs_to :buy_record
+
+
+### Association
+belongs_to :buy_record
+
