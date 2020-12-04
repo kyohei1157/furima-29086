@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get "/" => 'home#top'
+  get "home/top" => 'home#top'
 
   root  'users#index'  #この1行を追加
 

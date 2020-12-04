@@ -1,24 +1,57 @@
-# README
+## users
+|Column             |Type  |Options    |
+|-------------------|------|-----------|
+|surname            |string|null: false|
+|name               |string|null: false|
+|surname_furigana   |string|null: false|
+|name_furigana      |string|null: false|
+|nickname           |string|null: false|
+|email              |string|null: false|
+|encrypted_password |string|null: false|
+|birthday           |date  |null: false|
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Association
+has_many :items
+has_many :buy_records
 
-Things you may want to cover:
+## items
+|Column               | Type       |Options                         |
+|----------------------|-----------|--------------------------------|
+|name                  |string     |null: false                     |
+|explanation           |text       |null: false                     |
+|category_id           |integer    |null: false                     |
+|status_id             |integer    |null: false                     |
+|shipping_fee_burden_id|integer    |null: false                     |
+|prefecture_id         |integer    |null: false                     |
+|days_to_ship_id       |integer    |null: false                     |
+|price                 |integer    |null: false                     |
+|user                  |references |null: false, foreign_key: true  |
 
-* Ruby version
+### Association
+has_one :buy_record
+belongs_to :user
 
-* System dependencies
+## buy_records
+|Column|Type       |Options                        |
+|------|-----------|-------------------------------|
+|user  |references |null: false, foreign_key: true |
+|item  |references |null: false, foreign_key: true |
 
-* Configuration
+### Association
+has_one :street_add
+belongs_to :user
+belongs_to :item
 
-* Database creation
+## street_add
+|Column       |Type         |Options                         |
+|-------------|-------------|--------------------------------|
+|postal_cord  |string       |null: false                     |
+|prefecture_id|integer      |null: false                     |
+|municipality |string       |null: false                     |
+|address      |string       |null: false                     |
+|buildingname |string       ||
+|phone_number |string       |null: false                     |
+|buy_record   |references   |null: false, foreign_key: true  |
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+belongs_to :buy_record
