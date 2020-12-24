@@ -63,7 +63,7 @@ RSpec.describe User, type: :model do
       @user.birthday = ""
       @user.valid?
       binding.pry
-      expect(user.errors.full_messages).to include("Password_confirmation can't be blank")
+      expect(user.errors.full_messages).to include("Birthday can't be blank")
     end
     it "メールアドレスに@が含まれていない場合登録できない" do
       @user = FactoryBot.build(:user)
