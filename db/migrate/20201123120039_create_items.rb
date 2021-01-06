@@ -1,6 +1,6 @@
 class CreateItems < ActiveRecord::Migration[6.0]
   def change
-    create_table :articles do |t|
+    create_table :items do |t|
       t.string     :category        , null: false
       t.string       :status         , null: false
       t.string    :shipping_fee_burden     , null: false
