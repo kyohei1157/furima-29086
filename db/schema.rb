@@ -12,16 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_11_25_082245) do
 
-  create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "category", null: false
-    t.string "status", null: false
-    t.string "shipping_fee_burden", null: false
-    t.string "shipping_area", null: false
-    t.date "days_to_ship", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "surname", default: "", null: false
     t.string "name", default: "", null: false
