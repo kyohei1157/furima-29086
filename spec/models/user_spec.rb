@@ -89,12 +89,19 @@ RSpec.describe User, type: :model do
     it "姓のフリガナが全角（カタカナ）以外の場合登録できない" do
       @user.surname_furigana = "あいうえお"
       @user.valid?
-      expect(@user.errors.full_messages).to include("Surname furigana is invalid. Input full-width katakana characters.", "Name furigana is invalid. Input full-width katakana characters.")
+      expect(@user.errors.full_messages).to include("Surname furigana is invalid. Input full-width katakana characters.")
     end
     it "名のフリガナが全角（カタカナ）以外の場合登録できない" do
       @user.name_furigana = "かきくけこ"
       @user.valid?
       expect(@user.errors.full_messages).to include("Name furigana is invalid. Input full-width katakana characters.")
+    end
+    it "メールアドレスが登録済みの場合登録できない" do
+      @user.save
+      @another_user = FactoryBot.build(:user)
+      @another_user.email = @user.email
+      @another_user.valid?
+      expect(@another_user.errors.full_messages).to include("Email has already been taken")
     end
   end
 end

@@ -7,7 +7,7 @@ FactoryBot.define do
     surname {'田中'}
     name {'弘史'}
     surname_furigana {'タナカ'}
-    name_furigana {'ひろし'}
+    name_furigana {'ヒロシ'}
     birthday {'2020-01-01'}
   end
 end
