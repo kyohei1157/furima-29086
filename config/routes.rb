@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # get "/" => 'home#top'
 
   root  'users#index'  #この1行を追加
-
+  resources :messages, only: [:new, :create, :edit, :update]
     #ユーザー一覧を表示
     get '/users', to: 'users#index'
     #新規投稿（登録画面）に遷移
