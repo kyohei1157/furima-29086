@@ -69,3 +69,5 @@ gem 'active_hash'
 
 gem 'devise'
 gem 'active_hash'
+
+gem 'mini_magick'
