@@ -55,5 +55,6 @@ RSpec.describe Item, type: :model do
       @item.image = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Image can't be blank")
+    end
   end
 end
