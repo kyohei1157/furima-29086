@@ -10,8 +10,8 @@ class Item < ApplicationRecord
   has_one_attached :image
 
 
-  validates :name, presence: true
-  validates :explanation, presence: true
+  validates :name, presence: true, length: { maximum: 40 }
+  validates :explanation, presence: true, length: { maximum: 1000 }
   validates :category_id, presence: true
   validates :status_id, presence: true
   validates :shipping_fee_burden_id, presence: true
