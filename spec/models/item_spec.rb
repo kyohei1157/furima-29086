@@ -51,5 +51,29 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank")
     end
+    it "価格が半角英字の場合登録できない" do
+      @item.price = "aaaaaa"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters.")
+    end
+    it "価格が全角数字の場合登録できない" do
+      @item.price = "１２３４５"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters.")
+    end
+    it "1の場合登録できない" do
+      @item.category_id = 1
+      @item.status_id = 1
+      @item.shipping_fee_burden_id = 1
+      @item.prefecture_id = 1
+      @item.days_to_ship_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Category must be other than 1", "Status must be other than 1", "Shipping fee burden must be other than 1", "Prefecture must be other than 1", "Days to ship must be other than 1")
+    end
+    it "価格が¥300~¥9,999,999ではない場合登録できない" do
+      @item.price = 200
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not included in the list")
+    end
   end
 end

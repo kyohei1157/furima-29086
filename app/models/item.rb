@@ -9,21 +9,23 @@ class Item < ApplicationRecord
   has_one :buy_record
   has_one_attached :image
 
-
-  validates :name, presence: true, length: { maximum: 40 }
-  validates :explanation, presence: true, length: { maximum: 1000 }
-  validates :category_id, presence: true
-  validates :status_id, presence: true
-  validates :shipping_fee_burden_id, presence: true
-  validates :prefecture_id, presence: true
-  validates :days_to_ship_id, presence: true
-  validates :price, presence: true
-  validates :image, presence: true
-
-  validates :category_id, numericality: { other_than: 1 }
-  validates :status_id, numericality: { other_than: 1 }
-  validates :shipping_fee_burden_id, numericality: { other_than: 1 }
-  validates :prefecture_id, numericality: { other_than: 1 }
-  validates :days_to_ship_id, numericality: { other_than: 1 }
-
+  with_options presence: true do
+    validates :name, length: { maximum: 40 }
+    validates :explanation, length: { maximum: 1000 }
+    validates :category_id
+    validates :status_id
+    validates :shipping_fee_burden_id
+    validates :prefecture_id
+    validates :days_to_ship_id
+    validates :price, numericality: { with: /\A[0-9]+\z/, message: "is invalid. Input half-width characters."}
+    validates :image
+    validates_inclusion_of :price, in: 300..9999999
+  end
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :status_id
+    validates :shipping_fee_burden_id
+    validates :prefecture_id
+    validates :days_to_ship_id
+  end
 end
