@@ -92,7 +92,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Days to ship must be other than 1" )
     end
     it "価格が¥10,000,000以上の場合登録できない" do
-      @item.price = 10000001
+      @item.price = 10_000_000
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is not included in the list")
     end

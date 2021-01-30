@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee_burden
   belongs_to :prefecture
   belongs_to :days_to_ship
-  has_one :buy_record
+  #has_one :buy_record
   has_one_attached :image
 
   with_options presence: true do
