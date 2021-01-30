@@ -62,7 +62,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters.")
     end
     it "価格が¥300~¥9,999,999ではない場合登録できない" do
-      @item.price = 200
+      @item.price = 299
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is not included in the list")
     end
@@ -92,7 +92,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Days to ship must be other than 1" )
     end
     it "価格が¥10,000,000以上の場合登録できない" do
-      @item.price = 12000000
+      @item.price = 10000001
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is not included in the list")
     end
