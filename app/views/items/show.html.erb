@@ -21,7 +21,7 @@
         ¥ 999,999,999
       </span>
       <span class="item-postage">
-        <%= '配送料負担' %>
+        <%= @item.shipping_fee_burden_id %>
       </span>
     </div>
 
@@ -113,7 +113,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class='another-item'><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href="#" class='another-item'><%= @item.category_id %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
