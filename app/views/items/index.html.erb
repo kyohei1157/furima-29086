@@ -131,6 +131,11 @@
         <% @items.each do |item| %>
           <li class='list'>
             <%= link_to(items_path) do %>
+              <ul class="more_list">
+                <li>
+                  <%= link_to '詳細', item_path(item.id), method: :get %>
+                </li>
+              </ul>
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" %>
 
