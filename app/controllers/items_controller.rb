@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
   end
 
   def ensure_correct_user
-    if @current_user.id !=  params[:id].to_i
-     redirect_to("/posts/index")
+    if current_user.id !=  @item.user_id
+     redirect_to root_path
     end
   end
