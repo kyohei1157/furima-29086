@@ -1,6 +1,9 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update]
+
+{only: [:edit, :update]}
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -45,4 +48,9 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-end
+
+  def ensure_correct_user
+    if @current_user.id !=  params[:id].to_i
+     redirect_to("/posts/index")
+    end
+  end
