@@ -64,7 +64,3 @@ belongs_to :item
 ### Association
 belongs_to :buy_record
 
-
-### Association
-belongs_to :buy_record
-
