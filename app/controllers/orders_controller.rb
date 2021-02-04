@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, onry: [:create]
+  before_action :authenticate_user!, only: [:create]
 
   def index
     @order = AddressForm.new
