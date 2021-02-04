@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :order do
-    postal_cord {123-4567}
+    postal_cord {'123-4567'}
     prefecture_id {2}
     municipality {'札幌市'}
     address {'青山1-13-2'}

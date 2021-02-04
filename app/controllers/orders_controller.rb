@@ -1,9 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, onry: [:create]
-  before_action :ensure_correct_user, only: [:create]
 
   def index
-    @order = Order.new
+    @order = AddressForm.new
     @item = Item.find(params[:item_id])
   end
 
@@ -11,7 +10,8 @@ class OrdersController < ApplicationController
   end
   
   def create
-    @order = Order.new(order_params)
+    @item = Item.find(params[:item_id])
+    @order = AddressForm.new(order_params)
     if @order.valid?
       pay_item
       @order.save
@@ -23,12 +23,15 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:postal_cord,:prefecture_id, :municipality, :address, :phone_number, :card_number, :month, :year, :security_code).merge(order_id: params[:order])
+    params.require(:address_form).permit(:postal_cord,:prefecture_id, :municipality, :address, :phone_number ).merge(item_id: params[:item_id], token: params[:token],user_id: current_user.id)
   end
 
-  def ensure_correct_user
-    if current_user.id !=  @item.user_id
-      redirect_to root_path
-    end
+  def pay_item
+    Payjp.api_key = "sk_test_b2b863bc1e32c797fc7a53a7"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp::Charge.create(
+      amount: order_params[:price],  # 商品の値段
+      card: order_params[:token],    # カードトークン
+      currency: 'jpy'                 # 通貨の種類（日本円）
+    )
   end
 end
