@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, onry: [:create]
+  before_action :ensure_correct_user, only: [:create]
+
   def index
     @order = Order.new
     @item = Item.find(params[:item_id])
@@ -20,15 +23,12 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:price).merge(token: params[:token])
+    params.require(:order).permit(:postal_cord,:prefecture_id, :municipality, :address, :phone_number, :card_number, :month, :year, :security_code).merge(order_id: params[:order])
   end
 
-  def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-    Payjp::Charge.create(
-      amount: order_params[:price],  # 商品の値段
-      card: order_params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
-    )
+  def ensure_correct_user
+    if current_user.id !=  @item.user_id
+      redirect_to root_path
+    end
   end
 end

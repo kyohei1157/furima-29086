@@ -11,6 +11,11 @@ RSpec.describe Order, type: :model do
       @order.valid?
       expect(@order.errors.full_messages).to include("Card_number can't be blank")
     end
+    it "カード情報が半角英数字でなければ登録できない" do
+      @order.card_number = "１１２２３３４４５５６６７７８８"
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Card_number can't be blank")
+    end
     it "有効期限の月がないと登録できない" do
       @order.month = ""
       @order.valid?
@@ -28,6 +33,11 @@ RSpec.describe Order, type: :model do
     end
     it "郵便番号がなければ登録できない" do
       @order.postal_code = ""
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Postal_code can't be blank")
+    end
+    it "郵便番号はハイフンがなければがなければ登録できない" do
+      @order.postal_code = "1111111"
       @order.valid?
       expect(@order.errors.full_messages).to include("Postal_code can't be blank")
     end
@@ -53,3 +63,4 @@ RSpec.describe Order, type: :model do
     end
   end
 end
+
