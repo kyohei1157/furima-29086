@@ -9,10 +9,15 @@ RSpec.describe AddressForm, type: :model do
   end
   describe '商品購入' do
     context '内容に問題ない場合' do
-      it '全て正常' do
+      it 'buildingnameが空でも登録できる' do
+        @address_form.buildingname = ""
+        expect(@address_form.valid?).to eq true
+      end
+      it 'buildingnameがあっても登録できる' do
         expect(@address_form.valid?).to eq true
       end
     end
+    context '内容に問題がある場合' do
     it "郵便番号がなければ登録できない" do
       @address_form.postal_cord = ""
       @address_form.valid?
@@ -74,4 +79,6 @@ RSpec.describe AddressForm, type: :model do
       expect(@address_form.errors.full_messages).to include("Item can't be blank")
     end
   end
-end
+  end
+end 
+
