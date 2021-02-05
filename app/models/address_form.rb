@@ -4,15 +4,13 @@ class AddressForm
   
   with_options presence: true do
     validates :postal_cord, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
-    validates :prefecture_id
+    validates :prefecture_id, numericality: { other_than: 1 }
     validates :municipality
     validates :address
-    validates :phone_number
+    validates :phone_number, length: { maximum: 12 }
     validates :token
-   # validates :card_number, length: { maximum: 16 }, numericality: { with: /\A[0-9]+\z/, message: "is invalid. Input half-width characters."}
-    #validates :month
-    #validates :year
-    #validates_inclusion_of :security_code, in: 3..4
+    validates :user_id
+    validates :item_id
   end
 
   def save
