@@ -7,7 +7,7 @@ class AddressForm
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :municipality
     validates :address
-    validates :phone_number, length: { maximum: 12 }
+    validates :phone_number, length: { maximum: 12 }, numericality: { with: /\A[0-9]+\z/, message: "is invalid. Input half-width characters."}
     validates :token
     validates :user_id
     validates :item_id

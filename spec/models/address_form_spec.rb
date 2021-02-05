@@ -4,7 +4,8 @@ RSpec.describe AddressForm, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.create(:item)
-    @address_form = FactoryBot.build(:address_form)
+    @address_form = FactoryBot.build(:address_form, user_id: @user.id, item_id: @item.id )
+    sleep 0.1
   end
   describe '商品購入' do
     context '内容に問題ない場合' do
@@ -45,12 +46,12 @@ RSpec.describe AddressForm, type: :model do
     it "電話番号が12桁以上では登録できない" do
       @address_form.phone_number = "0901234567891"
       @address_form.valid?
-      expect(@address_form.errors.full_messages).to include("Phone number can't be blank")
+      expect(@address_form.errors.full_messages).to include("Phone number is too long (maximum is 12 characters)")
     end
     it "電話番号が英数混合では登録できない" do
       @address_form.phone_number = "090aabb2233"
       @address_form.valid?
-      expect(@address_form.errors.full_messages).to include("Phone number can't be blank")
+      expect(@address_form.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
     end
     it "tokenがなければ登録できない" do
       @address_form.token = ""
@@ -63,14 +64,14 @@ RSpec.describe AddressForm, type: :model do
       expect(@address_form.errors.full_messages).to include("Prefecture must be other than 1")
     end
     it "user_idがなければ登録できない" do
-      @user.user_id = ""
-      @user.valid?
-      expect(@user.errors.full_messages).to include("User can't be blank")
+      @address_form.user_id = ""
+      @address_form.valid?
+      expect(@address_form.errors.full_messages).to include("User can't be blank")
     end
     it "item_idがなければ登録できない" do
-      @item.item_id = ""
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Item can't be blank")
+      @address_form.item_id = ""
+      @address_form.valid?
+      expect(@address_form.errors.full_messages).to include("Item can't be blank")
     end
   end
 end

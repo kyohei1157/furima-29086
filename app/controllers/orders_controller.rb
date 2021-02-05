@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:index :create]
+  before_action :authenticate_user!, only: [:index ,:create]
   before_action :set_item, only: [:index, :create]
   before_action :ensure_correct_user, only: [:index]
  
@@ -27,7 +27,6 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-   #binding.pry
     Payjp.api_key = "sk_test_b2b863bc1e32c797fc7a53a7" 
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
@@ -41,7 +40,7 @@ class OrdersController < ApplicationController
   end
 
   def ensure_correct_user
-    if current_user.id ==  @item.user_id
+    if current_user.id ==  @item.user_id || @item.order.present?
      redirect_to root_path
     end
   end
