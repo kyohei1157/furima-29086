@@ -1,6 +1,6 @@
 class AddressForm
   include ActiveModel::Model
-  attr_accessor :postal_cord, :prefecture_id, :municipality, :address, :phone_number, :user_id, :item_id, :token
+  attr_accessor :postal_cord, :prefecture_id, :municipality, :address, :phone_number, :user_id, :item_id, :token, :building_name
   
   with_options presence: true do
     validates :postal_cord
@@ -15,7 +15,7 @@ class AddressForm
   end
 
   def save
-    Address.create(postal_code: postal_code, prefecture_id: prefectureid, municipality: municipality, address: address, building_name: building_name, user_id: user.id)
-    Donation.create(user_id: user.id, item_id: item.id)
+    Address.create(postal_cord: postal_cord, prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name, order_id: order.id)
+    Order.create(user_id: user.id, item_id: item.id)
   end
 end
